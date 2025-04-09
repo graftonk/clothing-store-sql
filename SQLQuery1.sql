@@ -1,10 +1,14 @@
-/*Use master;
+-- Create the ClothingStore Database
+Use master;
 Go
-drop database ClothingStore;
+Drop database ClothingStore;
 Go
-create database ClothingStore;*/
+Create database ClothingStore;
 
--- PERSON TABLE
+/*
+   Create the PERSON table
+   Written by Kaylee Grafton
+*/
 create table Person (
 	PersonID int Not Null identity(1000,1),
 	FirstName char(15) Not Null,
@@ -18,30 +22,41 @@ create table Person (
 	PersonType char(1) Not Null default 'C',
 -- table constraints
 	constraint person_personid_pk primary key(PersonID),
-	constraint person_persontype_ck check (PersonType in ('C', 'E', 'B'))
+	constraint person_persontype_ck check (PersonType in ('C', 'E', 'B')) -- c for customer, e for employee, b for both
 );
 
--- EMPLOYEE TABLE
+/*
+   Create the EMPLOYEE table
+   Written by Kaylee Grafton
+*/
 create table Employee (
 	PersonID int Not Null,
 	DateHired date Not Null,
 	DateTerminated date,
-	SSN char(10) Unique
+	SSN char(10) Not Null Unique,
 	DOB date Not Null,
 	Position char(15) Not Null,
 	PayRate decimal(10,2) Not Null,
 -- table constraints
 	constraint employee_personid_pk primary key(PersonID),
 	constraint employee_personid_fk foreign key(PersonID) references Person(PersonID)
+		on update cascade -- auto updates personid if it is changed elsewhere
+	        on delete no action, -- prevents deleting employees if they have data in other tables
+	constraint employee_ssn_uk unique(SSN)
 );
 
--- CUSTOMER TABLE
+/*
+   Create the CUSTOMER table
+   Written by Kaylee Grafton
+*/
 create table Customer (
 	PersonID int Not Null,
 	CustomerSince date Not Null,
 -- table constraints
 	constraint customer_personid_pk primary key(PersonID),
 	constraint customer_personid_fk foreign key(PersonID) references Person(PersonID)
+		on update cascade -- auto updates personid if it is changed elsewhere
+	        on delete no action -- prevents deleting customers if they have data in other tables
 );
 
 -- ORDER TABLE
