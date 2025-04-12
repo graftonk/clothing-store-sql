@@ -14,7 +14,7 @@ go
 -- Written by Kaylee Grafton
 --------------------------------------------------
 create table Person (
-	PersonID int Not Null identity(1000,1),
+	PersonID int Not Null,
 	FirstName char(15) Not Null,
 	LastName char(25) Not Null,
 	Address char(25) Not Null,
@@ -38,9 +38,9 @@ create table Employee (
 	PersonID int Not Null,
 	DateHired date Not Null,
 	DateTerminated date,
-	SSN char(10) Not Null Unique,
+	SSN char(12) Not Null Unique,
 	DOB date Not Null,
-	Position char(15) Not Null,
+	Position char(25) Not Null,
 	PayRate decimal(10,2) Not Null,
 -- table constraints
 	constraint employee_personid_pk primary key(PersonID),
@@ -72,37 +72,17 @@ create table Customer (
 -- Written by Brennan Owings
 --------------------------------------------------
 create table [Order](
-	OrderID int Not Null identity(1000,1),
+	OrderID int Not Null,
 	OrderDate date Not Null,
 	EmployeeIDTookOrder int Not Null,
 	CustomerIDPlacedOrder int Not Null
 	constraint order_orderid_pk primary key(OrderID),
 	constraint order_EmployeeIDTookOrder_fk foreign key(EmployeeIDTookOrder) references Employee(PersonID)
-	on update cascade
+		on update no action
 		on delete no action,
 	constraint order_customeridplacedorder_fk foreign key(CustomerIDPlacedOrder) references Customer(PersonID)
-		on update cascade
-			on delete no action
-);
-
---------------------------------------------------
--- 5. CREATE ORDER_ITEM TABLE
--- Create the Order_Item table and add table constraints
--- Written by Brennan Owings
---------------------------------------------------
-create table Order_Item(
-	OrderItemID int Not Null identity(1000,1),
-	OrderID int Not Null,
-	ItemID int Not Null,
-	Quantity int Not Null,
-	constraint orderitem_orderitemid_pk primary key(OrderItemID),
-	constraint orderitem_orderid_fk foreign key(OrderID) references [Order](OrderID)
-		on update cascade
-			on delete no action,
-	constraint orderitem_itemid_fk foreign key (ItemID) references Item(ItemID)
-		on update cascade
-			on delete no action,
-
+		on update no action
+		on delete no action
 );
 
 --------------------------------------------------
@@ -111,27 +91,10 @@ create table Order_Item(
 -- Written by Brennan Owings
 --------------------------------------------------
 create table Category(
-	CategoryID int Not Null identity(1000,1),
+	CategoryID int Not Null,
 	CategoryName char(15) Not Null,
 	CategoryDescription varchar(225) Not Null,
 	constraint category_categoryid_pk primary key(CategoryID)
-);
-
---------------------------------------------------
--- 7. CREATE INVENTORY TABLE
--- Create the Inventory table and add table constraints
--- Written by Brennan Owings
---------------------------------------------------
-create table Inventory(
-	StockID int Not Null identity(1000,1),
-	ItemID int Not Null,
-	QuantityInStock int Not Null,
-	ReorderLevel int Not Null,
-	constraint inventory_inventoryid_pk primary key(StockID),
-	constraint inventory_itemid_fk foreign key(ItemID) references Item(ItemID)
-		on update cascade
-			on delete no action,
-
 );
 
 --------------------------------------------------
@@ -140,10 +103,10 @@ create table Inventory(
 -- Written by Brennan Owings
 --------------------------------------------------
 create table Supplier(
-	SupplierID int Not Null identity(1000,1),
+	SupplierID int Not Null,
 	SupplierName varchar(50) Not Null,
 	ContactPerson varchar(50) Not Null,
-	Phone char(10) Not Null,
+	Phone char(12) Not Null,
 	Email varchar(25) Not Null,
 	constraint supplier_supplierid_pk primary key(SupplierID)
 
@@ -155,7 +118,7 @@ create table Supplier(
 -- Written by Brennan Owings
 --------------------------------------------------
 create table Item(
-	ItemID int Not Null identity(1000,1),
+	ItemID int Not Null,
 	ItemName Char(15) Not Null,
 	ItemDescription VarChar(30) Not Null,
 	RetailPrice decimal(5, 2) Not Null,
@@ -173,12 +136,49 @@ create table Item(
 );
 
 --------------------------------------------------
+-- 5. CREATE ORDER_ITEM TABLE
+-- Create the Order_Item table and add table constraints
+-- Written by Brennan Owings
+--------------------------------------------------
+create table Order_Item(
+	OrderItemID int Not Null,
+	OrderID int Not Null,
+	ItemID int Not Null,
+	Quantity int Not Null,
+	constraint orderitem_orderitemid_pk primary key(OrderItemID),
+	constraint orderitem_orderid_fk foreign key(OrderID) references [Order](OrderID)
+		on update cascade
+		on delete no action,
+	constraint orderitem_itemid_fk foreign key (ItemID) references Item(ItemID)
+		on update cascade
+		on delete no action,
+
+);
+
+--------------------------------------------------
+-- 7. CREATE INVENTORY TABLE
+-- Create the Inventory table and add table constraints
+-- Written by Brennan Owings
+--------------------------------------------------
+create table Inventory(
+	StockID int Not Null,
+	ItemID int Not Null,
+	QuantityInStock int Not Null,
+	ReorderLevel int Not Null,
+	constraint inventory_inventoryid_pk primary key(StockID),
+	constraint inventory_itemid_fk foreign key(ItemID) references Item(ItemID)
+		on update cascade
+			on delete no action,
+
+);
+
+--------------------------------------------------
 -- 10. CREATE PAYMENT TABLE
 -- Create the Payment table and add table constraints
 -- Written by Brennan Owings
 --------------------------------------------------
 create table Payment(
-	PaymentID int Not Null identity(1000,1),
+	PaymentID int Not Null,
 	OrderID int Not Null,
 	PaymentMethod varchar(20) Not Null,
 	PaymentStatus varchar(15) Not Null,
@@ -274,28 +274,6 @@ values
 (10, '2025-04-11', 4, 14);
 
 --------------------------------------------------
--- 5. INSERT INTO ORDER_ITEM TABLE
--- Insert sample data into the Order_Item table
--- Written by Kaylee Grafton
---------------------------------------------------
-insert into Order_Item (OrderItemID, OrderID, ItemID, Quantity)
-values
-(1, 1, 1, 2),
-(2, 1, 3, 1),
-(3, 2, 2, 1),
-(4, 3, 5, 4),
-(5, 4, 4, 2),
-(6, 5, 6, 1),
-(7, 5, 10, 1),
-(8, 6, 7, 2),
-(9, 7, 8, 1),
-(10, 8, 9, 2),
-(11, 9, 10, 2),
-(12, 9, 2, 2),
-(13, 9, 3, 1),
-(14, 10, 10, 3);
-
---------------------------------------------------
 -- 6. INSERT INTO CATEGORY TABLE
 -- Insert sample data into the Category table
 -- Written by Kaylee Grafton
@@ -307,24 +285,6 @@ values
 (3, 'Outerwear', 'Coats, jackets, vests, etc.'),
 (4, 'Footwear', 'Shoes, boots, sandals, etc.'),
 (5, 'Accessories', 'Hats, scarves, gloves, bags, belts, ties, jewelry, etc.');
-
---------------------------------------------------
--- 7. INSERT INTO INVENTORY TABLE
--- Insert sample data into the Inventory table
--- Written by Kaylee Grafton
---------------------------------------------------
-insert into Inventory (StockID, ItemID, QuantityInStock, ReorderLevel)
-values
-(1, 1, 20, 5),
-(2, 2, 15, 4),
-(3, 3, 10, 2),
-(4, 4, 25, 5),
-(5, 5, 30, 10),
-(6, 6, 12, 3),
-(7, 7, 18, 5),
-(8, 8, 22, 6),
-(9, 9, 8, 3),
-(10, 10, 30, 10);
 
 --------------------------------------------------
 -- 8. INSERT INTO SUPPLIER TABLE
@@ -356,6 +316,46 @@ values
 (8, 'Casual Sneakers', 'Everyday walking ease', 50.00, 30.00, 3, 4),
 (9, 'Raincoat', 'Durable and waterproof', 60.00, 35.00, 4, 3),
 (10, 'Graphic Tee', 'Bold print, casual vibe', 18.00, 10.00, 1, 1);
+
+--------------------------------------------------
+-- 5. INSERT INTO ORDER_ITEM TABLE
+-- Insert sample data into the Order_Item table
+-- Written by Kaylee Grafton
+--------------------------------------------------
+insert into Order_Item (OrderItemID, OrderID, ItemID, Quantity)
+values
+(1, 1, 1, 2),
+(2, 1, 3, 1),
+(3, 2, 2, 1),
+(4, 3, 5, 4),
+(5, 4, 4, 2),
+(6, 5, 6, 1),
+(7, 5, 10, 1),
+(8, 6, 7, 2),
+(9, 7, 8, 1),
+(10, 8, 9, 2),
+(11, 9, 10, 2),
+(12, 9, 2, 2),
+(13, 9, 3, 1),
+(14, 10, 10, 3);
+
+--------------------------------------------------
+-- 7. INSERT INTO INVENTORY TABLE
+-- Insert sample data into the Inventory table
+-- Written by Kaylee Grafton
+--------------------------------------------------
+insert into Inventory (StockID, ItemID, QuantityInStock, ReorderLevel)
+values
+(1, 1, 20, 5),
+(2, 2, 15, 4),
+(3, 3, 10, 2),
+(4, 4, 25, 5),
+(5, 5, 30, 10),
+(6, 6, 12, 3),
+(7, 7, 18, 5),
+(8, 8, 22, 6),
+(9, 9, 8, 3),
+(10, 10, 30, 10);
 
 --------------------------------------------------
 -- 10. INSERT INTO PAYMENT TABLE
