@@ -14,7 +14,7 @@ go
 -- Written by Kaylee Grafton
 --------------------------------------------------
 create table Person (
-	PersonID int Not Null,
+	PersonID int Not Null identity(1000,1),
 	FirstName char(15) Not Null,
 	LastName char(25) Not Null,
 	Address char(25) Not Null,
@@ -72,7 +72,7 @@ create table Customer (
 -- Written by Brennan Owings
 --------------------------------------------------
 create table [Order](
-	OrderID int Not Null,
+	OrderID int Not Null identity(1000,1),
 	OrderDate date Not Null,
 	EmployeeIDTookOrder int Not Null,
 	CustomerIDPlacedOrder int Not Null
@@ -91,7 +91,7 @@ create table [Order](
 -- Written by Brennan Owings
 --------------------------------------------------
 create table Category(
-	CategoryID int Not Null,
+	CategoryID int Not Null identity(1000,1),
 	CategoryName char(15) Not Null,
 	CategoryDescription varchar(225) Not Null,
 	constraint category_categoryid_pk primary key(CategoryID)
@@ -103,7 +103,7 @@ create table Category(
 -- Written by Brennan Owings
 --------------------------------------------------
 create table Supplier(
-	SupplierID int Not Null,
+	SupplierID int Not Null identity(1000,1),
 	SupplierName varchar(50) Not Null,
 	ContactPerson varchar(50) Not Null,
 	Phone char(12) Not Null,
@@ -118,7 +118,7 @@ create table Supplier(
 -- Written by Brennan Owings
 --------------------------------------------------
 create table Item(
-	ItemID int Not Null,
+	ItemID int Not Null identity(1000,1),
 	ItemName Char(15) Not Null,
 	ItemDescription VarChar(30) Not Null,
 	RetailPrice decimal(5, 2) Not Null,
@@ -141,7 +141,7 @@ create table Item(
 -- Written by Brennan Owings
 --------------------------------------------------
 create table Order_Item(
-	OrderItemID int Not Null,
+	OrderItemID int Not Null identity(1000,1),
 	OrderID int Not Null,
 	ItemID int Not Null,
 	Quantity int Not Null,
@@ -161,7 +161,7 @@ create table Order_Item(
 -- Written by Brennan Owings
 --------------------------------------------------
 create table Inventory(
-	StockID int Not Null,
+	StockID int Not Null identity(1000,1),
 	ItemID int Not Null,
 	QuantityInStock int Not Null,
 	ReorderLevel int Not Null,
@@ -178,7 +178,7 @@ create table Inventory(
 -- Written by Brennan Owings
 --------------------------------------------------
 create table Payment(
-	PaymentID int Not Null,
+	PaymentID int Not Null identity(1000,1),
 	OrderID int Not Null,
 	PaymentMethod varchar(20) Not Null,
 	PaymentStatus varchar(15) Not Null,
@@ -197,25 +197,25 @@ create table Payment(
 -- Written by Kaylee Grafton
 --------------------------------------------------
 
-insert into Person (PersonID, FirstName, LastName, Address, City, State, ZipCode, Email, Phone, PersonType)
+insert into Person (FirstName, LastName, Address, City, State, ZipCode, Email, Phone, PersonType)
 values
-(1, 'Teisha', 'Alexander', '123 Maplewood St', 'Roseville', 'MI', '48066', 'talexander@gmail.com', '586-123-4567', 'E'),
-(2, 'Freddie', 'Clark', '456 Cherry Blossom Ave', 'Warren', 'MI', '48088', 'fredclark@yahoo.com', '586-234-5678', 'E'),
-(3, 'Matthew', 'Knight', '123 Meadowbrook Blvd', 'Macomb', 'MI', '48044', 'matthew.knight@aol.com', '586-345-6789', 'E'),
-(4, 'Anna', 'Nicholson', '456 Autumn Ridge Rd', 'Macomb', 'MI', '48042', 'anicholson@gmail.com', '586-456-7890', 'E'),
-(5, 'Sidney', 'Price', '987 Riverbend Rd', 'Clinton Twp', 'MI', '48038', 'sidneyprice@gmail.com', '586-567-8901', 'E'),
-(6, 'Tanner', 'Cooke', '123 Birchwood Dr', 'Sterling Heights', 'MI', '48312', 'tannercooke@aol.com', '586-678-9012', 'E'),
-(7, 'Alexis', 'Kramer', '456 Copperfield Ln', 'Sterling Heights', 'MI', '48313', 'alexiskramer@yahoo.com', '586-789-0123', 'E'),
-(8, 'Aiden', 'Browning', '345 Sycamore St', 'Warren', 'MI', '48089', 'abrowning@gmail.com', '586-890-1234', 'B'),
-(9, 'Devon', 'Miller', '789 Oakridge Dr', 'Roseville', 'MI', '48066', 'devonmiller@outlook.com', '586-901-2345', 'B'),
-(10, 'Jackson', 'Carter', '567 Crestwood Dr', 'Clinton Twp', 'MI', '48038', 'jacksoncarter@hotmail.com', '586-012-3456', 'B'),
-(11, 'Leah', 'Gibson', '654 Sunrise Blvd', 'Sterling Heights', 'MI', '48313', 'leahgibson@yahoo.com', '586-213-4567', 'C'),
-(12, 'Jamie', 'Kelley', '654 Valley View St', 'Macomb', 'MI', '48044', 'jkelly@hotmail.com', '586-324-5678', 'C'),
-(13, 'Charles', 'Saunders', '890 Aspen Grove Dr', 'Roseville', 'MI', '48066', 'csaunders@gmail.com', '586-435-6789', 'C'),
-(14, 'Jessie', 'Norris', '234 Willow Creek Rd', 'Roseville', 'MI', '48066', 'bitethebullet@aol.com', '586-546-7890', 'C'),
-(15, 'Skylar', 'Hughes', '567 Poplar Way', 'Warren', 'MI', '48088', 'skyhughes@gmail.com', '586-657-8901', 'C'),
-(16, 'Keira', 'Edwards', '789 Maple Crest Ct', 'Sterling Heights', 'MI', '48310', 'pieceofcake@yahoo.com', '586-768-9012', 'C'),
-(17, 'Sophia', 'Webb', '890 Greenfield Ln', 'Clinton Twp', 'MI', '48035', 'sophiawebb@gmail.com', '586-879-0123', 'C');
+('Teisha', 'Alexander', '123 Maplewood St', 'Roseville', 'MI', '48066', 'talexander@gmail.com', '586-123-4567', 'E'),
+('Freddie', 'Clark', '456 Cherry Blossom Ave', 'Warren', 'MI', '48088', 'fredclark@yahoo.com', '586-234-5678', 'E'),
+('Matthew', 'Knight', '123 Meadowbrook Blvd', 'Macomb', 'MI', '48044', 'matthew.knight@aol.com', '586-345-6789', 'E'),
+('Anna', 'Nicholson', '456 Autumn Ridge Rd', 'Macomb', 'MI', '48042', 'anicholson@gmail.com', '586-456-7890', 'E'),
+('Sidney', 'Price', '987 Riverbend Rd', 'Clinton Twp', 'MI', '48038', 'sidneyprice@gmail.com', '586-567-8901', 'E'),
+('Tanner', 'Cooke', '123 Birchwood Dr', 'Sterling Heights', 'MI', '48312', 'tannercooke@aol.com', '586-678-9012', 'E'),
+('Alexis', 'Kramer', '456 Copperfield Ln', 'Sterling Heights', 'MI', '48313', 'alexiskramer@yahoo.com', '586-789-0123', 'E'),
+('Aiden', 'Browning', '345 Sycamore St', 'Warren', 'MI', '48089', 'abrowning@gmail.com', '586-890-1234', 'B'),
+('Devon', 'Miller', '789 Oakridge Dr', 'Roseville', 'MI', '48066', 'devonmiller@outlook.com', '586-901-2345', 'B'),
+('Jackson', 'Carter', '567 Crestwood Dr', 'Clinton Twp', 'MI', '48038', 'jacksoncarter@hotmail.com', '586-012-3456', 'B'),
+('Leah', 'Gibson', '654 Sunrise Blvd', 'Sterling Heights', 'MI', '48313', 'leahgibson@yahoo.com', '586-213-4567', 'C'),
+('Jamie', 'Kelley', '654 Valley View St', 'Macomb', 'MI', '48044', 'jkelly@hotmail.com', '586-324-5678', 'C'),
+('Charles', 'Saunders', '890 Aspen Grove Dr', 'Roseville', 'MI', '48066', 'csaunders@gmail.com', '586-435-6789', 'C'),
+('Jessie', 'Norris', '234 Willow Creek Rd', 'Roseville', 'MI', '48066', 'bitethebullet@aol.com', '586-546-7890', 'C'),
+('Skylar', 'Hughes', '567 Poplar Way', 'Warren', 'MI', '48088', 'skyhughes@gmail.com', '586-657-8901', 'C'),
+('Keira', 'Edwards', '789 Maple Crest Ct', 'Sterling Heights', 'MI', '48310', 'pieceofcake@yahoo.com', '586-768-9012', 'C'),
+('Sophia', 'Webb', '890 Greenfield Ln', 'Clinton Twp', 'MI', '48035', 'sophiawebb@gmail.com', '586-879-0123', 'C');
 
 --------------------------------------------------
 -- 2. INSERT INTO EMPLOYEE TABLE
@@ -225,16 +225,16 @@ values
 
 insert into Employee (PersonID, DateHired, SSN, DOB, Position, PayRate)
 values
-(1, '2020-01-15', '123-45-6789', '1984-12-21', 'Store Manager', 25.00),
-(2, '2019-06-20', '234-56-7890', '1988-06-02', 'Assistant Store Manager', 20.00),
-(3, '2021-03-10', '345-67-8901', '1973-02-01', 'Sales Associate', 14.75),
-(4, '2022-07-01', '456-78-9012', '1966-07-24', 'Cashier', 13.25),
-(5, '2023-11-05', '567-89-0123', '1992-11-03', 'Stock Associate', 13.50),
-(6, '2018-05-10', '678-90-1234', '1996-04-05', 'Cashier', 13.00),
-(7, '2020-10-01', '789-01-2345', '1990-05-01', 'Stock Associate', 13.25),
-(8, '2023-04-22', '890-12-3456', '1982-09-19', 'Sales Associate', 14.00),
-(9, '2021-12-15', '901-23-4567', '1995-08-29', 'Cashier', 13.00),
-(10, '2019-08-30', '012-34-5678', '1992-05-03', 'Stock Associate', 13.25);
+(1000, '2020-01-15', '123-45-6789', '1984-12-21', 'Store Manager', 25.00),
+(1001, '2019-06-20', '234-56-7890', '1988-06-02', 'Assistant Store Manager', 20.00),
+(1002, '2021-03-10', '345-67-8901', '1973-02-01', 'Sales Associate', 14.75),
+(1003, '2022-07-01', '456-78-9012', '1966-07-24', 'Cashier', 13.25),
+(1004, '2023-11-05', '567-89-0123', '1992-11-03', 'Stock Associate', 13.50),
+(1005, '2018-05-10', '678-90-1234', '1996-04-05', 'Cashier', 13.00),
+(1006, '2020-10-01', '789-01-2345', '1990-05-01', 'Stock Associate', 13.25),
+(1007, '2023-04-22', '890-12-3456', '1982-09-19', 'Sales Associate', 14.00),
+(1008, '2021-12-15', '901-23-4567', '1995-08-29', 'Cashier', 13.00),
+(1009, '2019-08-30', '012-34-5678', '1992-05-03', 'Stock Associate', 13.25);
 
 --------------------------------------------------
 -- 3. INSERT INTO CUSTOMER TABLE
@@ -244,136 +244,136 @@ values
 
 insert into Customer (PersonID, CustomerSince)
 values
-(8, '2021-04-12'),
-(9, '2020-09-15'),
-(10, '2022-01-20'),
-(11, '2021-11-08'),
-(12, '2023-03-18'),
-(13, '2022-06-24'),
-(14, '2020-08-10'),
-(15, '2019-12-05'),
-(16, '2023-02-17'),
-(17, '2024-01-22');
+(1007, '2021-04-12'),
+(1008, '2020-09-15'),
+(1009, '2022-01-20'),
+(1010, '2021-11-08'),
+(1011, '2023-03-18'),
+(1012, '2022-06-24'),
+(1013, '2020-08-10'),
+(1014, '2019-12-05'),
+(1015, '2023-02-17'),
+(1016, '2024-01-22');
 
 --------------------------------------------------
 -- 4. INSERT INTO ORDER TABLE
 -- Insert sample data into the Order table
 -- Written by Kaylee Grafton
 --------------------------------------------------
-insert into [Order] (OrderID, OrderDate, EmployeeIDTookOrder, CustomerIDPlacedOrder)
+insert into [Order] (OrderDate, EmployeeIDTookOrder, CustomerIDPlacedOrder)
 values
-(1, '2025-04-01', 3, 17),
-(2, '2025-04-03', 4, 12),
-(3, '2025-04-04', 6, 9),
-(4, '2025-04-05', 8, 10),
-(5, '2025-04-06', 9, 11),
-(6, '2025-04-07', 6, 13),
-(7, '2025-04-08', 8, 16),
-(8, '2025-04-09', 4, 15),
-(9, '2025-04-10', 3, 8),
-(10, '2025-04-11', 4, 14);
+('2025-04-01', 1002, 1016),
+('2025-04-03', 1003, 1011),
+('2025-04-04', 1005, 1008),
+('2025-04-05', 1007, 1009),
+('2025-04-06', 1008, 1010),
+('2025-04-07', 1005, 1012),
+('2025-04-08', 1007, 1015),
+('2025-04-09', 1003, 1014),
+('2025-04-10', 1002, 1007),
+('2025-04-11', 1003, 1013);
 
 --------------------------------------------------
 -- 6. INSERT INTO CATEGORY TABLE
 -- Insert sample data into the Category table
 -- Written by Kaylee Grafton
 --------------------------------------------------
-insert into Category (CategoryID, CategoryName, CategoryDescription)
+insert into Category (CategoryName, CategoryDescription)
 values
-(1, 'Tops', 'Shirts, blouses, tees, etc.'),
-(2, 'Bottoms', 'Pants, skirts, and shorts.'),
-(3, 'Outerwear', 'Coats, jackets, vests, etc.'),
-(4, 'Footwear', 'Shoes, boots, sandals, etc.'),
-(5, 'Accessories', 'Hats, scarves, gloves, bags, belts, ties, jewelry, etc.');
+('Tops', 'Shirts, blouses, tees, etc.'),
+('Bottoms', 'Pants, skirts, and shorts.'),
+('Outerwear', 'Coats, jackets, vests, etc.'),
+('Footwear', 'Shoes, boots, sandals, etc.'),
+('Accessories', 'Hats, scarves, gloves, bags, belts, ties, jewelry, etc.');
 
 --------------------------------------------------
 -- 8. INSERT INTO SUPPLIER TABLE
 -- Insert sample data into the Supplier table
 -- Written by Kaylee Grafton
 --------------------------------------------------
-insert into Supplier (SupplierID, SupplierName, ContactPerson, Phone, Email)
+insert into Supplier (SupplierName, ContactPerson, Phone, Email)
 values
-(1, 'Trendy Threads', 'Lisa Green', '123-456-7890', 'lisa@threads.com'),
-(2, 'Classic Apparel', 'John Smith', '234-567-8901', 'john@classicapparel.com'),
-(3, 'Footwear Factory', 'Mark Taylor', '345-678-9012', 'mark@footwearfactory.com'),
-(4, 'Outerwear Co.', 'Sarah Johnson', '456-789-0123', 'sarah@outwear.com'),
-(5, 'Accessory World', 'Emily Brown', '567-890-1234', 'emily@accessoryworld.com');
+('Trendy Threads', 'Lisa Green', '123-456-7890', 'lisa@threads.com'),
+('Classic Apparel', 'John Smith', '234-567-8901', 'john@classicapparel.com'),
+('Footwear Factory', 'Mark Taylor', '345-678-9012', 'mark@footwearfactory.com'),
+('Outerwear Co.', 'Sarah Johnson', '456-789-0123', 'sarah@outwear.com'),
+('Accessory World', 'Emily Brown', '567-890-1234', 'emily@accessoryworld.com');
 
 --------------------------------------------------
 -- 9. INSERT INTO ITEM TABLE
 -- Insert sample data into the Item table
 -- Written by Kaylee Grafton
 --------------------------------------------------
-insert into Item (ItemID, ItemName, ItemDescription, RetailPrice, WholesalePrice, SupplierID, CategoryID)
+insert into Item (ItemName, ItemDescription, RetailPrice, WholesalePrice, SupplierID, CategoryID)
 values
-(1, 'Cotton T-Shirt', 'Soft cotton, classic fit.', 15.00, 8.00, 1, 1),
-(2, 'Denim Jeans', 'Sturdy with modern style', 40.00, 25.00, 2, 2),
-(3, 'Leather Jacket', 'Sleek, warm, timeless', 150.00, 100.00, 4, 3),
-(4, 'Running Shoes', 'Lightweight and flexible', 70.00, 40.00, 3, 4),
-(5, 'Beanie Hat', 'Warm knit, snug fit', 10.00, 5.00, 5, 5),
-(6, 'Summer Shorts', 'Cool, relaxed comfort', 25.00, 15.00, 2, 2),
-(7, 'Wool Scarf', 'Cozy, textured finish', 20.00, 12.00, 5, 5),
-(8, 'Casual Sneakers', 'Everyday walking ease', 50.00, 30.00, 3, 4),
-(9, 'Raincoat', 'Durable and waterproof', 60.00, 35.00, 4, 3),
-(10, 'Graphic Tee', 'Bold print, casual vibe', 18.00, 10.00, 1, 1);
+('Cotton T-Shirt', 'Soft cotton, classic fit.', 15.00, 8.00, 1000, 1000),
+('Denim Jeans', 'Sturdy with modern style', 40.00, 25.00, 1001, 1001),
+('Leather Jacket', 'Sleek, warm, timeless', 150.00, 100.00, 1003, 1002),
+('Running Shoes', 'Lightweight and flexible', 70.00, 40.00, 1002, 1003),
+('Beanie Hat', 'Warm knit, snug fit', 10.00, 5.00, 1004, 1004),
+('Summer Shorts', 'Cool, relaxed comfort', 25.00, 15.00, 1001, 1001),
+('Wool Scarf', 'Cozy, textured finish', 20.00, 12.00, 1004, 1004),
+('Casual Sneakers', 'Everyday walking ease', 50.00, 30.00, 1002, 1003),
+('Raincoat', 'Durable and waterproof', 60.00, 35.00, 1003, 1002),
+('Graphic Tee', 'Bold print, casual vibe', 18.00, 10.00, 1000, 1000);
 
 --------------------------------------------------
 -- 5. INSERT INTO ORDER_ITEM TABLE
 -- Insert sample data into the Order_Item table
 -- Written by Kaylee Grafton
 --------------------------------------------------
-insert into Order_Item (OrderItemID, OrderID, ItemID, Quantity)
+insert into Order_Item (OrderID, ItemID, Quantity)
 values
-(1, 1, 1, 2),
-(2, 1, 3, 1),
-(3, 2, 2, 1),
-(4, 3, 5, 4),
-(5, 4, 4, 2),
-(6, 5, 6, 1),
-(7, 5, 10, 1),
-(8, 6, 7, 2),
-(9, 7, 8, 1),
-(10, 8, 9, 2),
-(11, 9, 10, 2),
-(12, 9, 2, 2),
-(13, 9, 3, 1),
-(14, 10, 10, 3);
+(1000, 1000, 2),
+(1000, 1002, 1),
+(1001, 1001, 1),
+(1002, 1004, 4),
+(1003, 1003, 2),
+(1004, 1005, 1),
+(1004, 1009, 1),
+(1005, 1006, 2),
+(1006, 1007, 1),
+(1007, 1008, 2),
+(1008, 1009, 2),
+(1008, 1001, 2),
+(1008, 1002, 1),
+(1009, 1009, 3);
 
 --------------------------------------------------
 -- 7. INSERT INTO INVENTORY TABLE
 -- Insert sample data into the Inventory table
 -- Written by Kaylee Grafton
 --------------------------------------------------
-insert into Inventory (StockID, ItemID, QuantityInStock, ReorderLevel)
+insert into Inventory (ItemID, QuantityInStock, ReorderLevel)
 values
-(1, 1, 20, 5),
-(2, 2, 15, 4),
-(3, 3, 10, 2),
-(4, 4, 25, 5),
-(5, 5, 30, 10),
-(6, 6, 12, 3),
-(7, 7, 18, 5),
-(8, 8, 22, 6),
-(9, 9, 8, 3),
-(10, 10, 30, 10);
+(1000, 20, 5),
+(1001, 15, 4),
+(1002, 10, 2),
+(1003, 25, 5),
+(1004, 30, 10),
+(1005, 12, 3),
+(1006, 18, 5),
+(1007, 22, 6),
+(1008, 8, 3),
+(1009, 30, 10);
 
 --------------------------------------------------
 -- 10. INSERT INTO PAYMENT TABLE
 -- Insert sample data into the Payment table
 -- Written by Kaylee Grafton
 --------------------------------------------------
-insert into Payment (PaymentID, OrderID, PaymentMethod, PaymentStatus)
+insert into Payment (OrderID, PaymentMethod, PaymentStatus)
 values
-(1, 1, 'Credit Card', 'Completed'),
-(2, 2, 'Cash', 'Completed'),
-(3, 3, 'Debit Card', 'Pending'),
-(4, 4, 'Credit Card', 'Completed'),
-(5, 5, 'Cash', 'Completed'),
-(6, 6, 'Credit Card', 'Pending'),
-(7, 7, 'Debit Card', 'Completed'),
-(8, 8, 'Credit Card', 'Completed'),
-(9, 9, 'Cash', 'Completed'),
-(10, 10, 'Debit Card', 'Completed');
+(1000, 'Credit Card', 'Completed'),
+(1001, 'Cash', 'Completed'),
+(1002, 'Debit Card', 'Pending'),
+(1003, 'Credit Card', 'Completed'),
+(1004, 'Cash', 'Completed'),
+(1005, 'Credit Card', 'Pending'),
+(1006, 'Debit Card', 'Completed'),
+(1007, 'Credit Card', 'Completed'),
+(1008, 'Cash', 'Completed'),
+(1009, 'Debit Card', 'Completed');
 
 -- SQL Part 2 Queries for ClothingStore Database
 -- Written by Saifur Rahman
