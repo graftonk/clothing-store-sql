@@ -86,7 +86,7 @@ create table [Order](
 );
 
 --------------------------------------------------
--- 6. CREATE CATEGORY TABLE
+-- 5. CREATE CATEGORY TABLE
 -- Create the Category table and add table constraints
 -- Written by Brennan Owings
 --------------------------------------------------
@@ -98,7 +98,7 @@ create table Category(
 );
 
 --------------------------------------------------
--- 8. CREATE SUPPLIER TABLE
+-- 6. CREATE SUPPLIER TABLE
 -- Create the Supplier table and add table constraints
 -- Written by Brennan Owings
 --------------------------------------------------
@@ -113,7 +113,7 @@ create table Supplier(
 );
 
 --------------------------------------------------
--- 9. CREATE ITEM TABLE
+-- 7. CREATE ITEM TABLE
 -- Create the Item table and add table constraints
 -- Written by Brennan Owings
 --------------------------------------------------
@@ -136,7 +136,7 @@ create table Item(
 );
 
 --------------------------------------------------
--- 5. CREATE ORDER_ITEM TABLE
+-- 8. CREATE ORDER_ITEM TABLE
 -- Create the Order_Item table and add table constraints
 -- Written by Brennan Owings
 --------------------------------------------------
@@ -156,7 +156,7 @@ create table Order_Item(
 );
 
 --------------------------------------------------
--- 7. CREATE INVENTORY TABLE
+-- 9. CREATE INVENTORY TABLE
 -- Create the Inventory table and add table constraints
 -- Written by Brennan Owings
 --------------------------------------------------
@@ -274,7 +274,7 @@ values
 ('2025-04-11', 1003, 1013);
 
 --------------------------------------------------
--- 6. INSERT INTO CATEGORY TABLE
+-- 5. INSERT INTO CATEGORY TABLE
 -- Insert sample data into the Category table
 -- Written by Kaylee Grafton
 --------------------------------------------------
@@ -287,7 +287,7 @@ values
 ('Accessories', 'Hats, scarves, gloves, bags, belts, ties, jewelry, etc.');
 
 --------------------------------------------------
--- 8. INSERT INTO SUPPLIER TABLE
+-- 6. INSERT INTO SUPPLIER TABLE
 -- Insert sample data into the Supplier table
 -- Written by Kaylee Grafton
 --------------------------------------------------
@@ -300,7 +300,7 @@ values
 ('Accessory World', 'Emily Brown', '567-890-1234', 'emily@accessoryworld.com');
 
 --------------------------------------------------
--- 9. INSERT INTO ITEM TABLE
+-- 7. INSERT INTO ITEM TABLE
 -- Insert sample data into the Item table
 -- Written by Kaylee Grafton
 --------------------------------------------------
@@ -318,7 +318,7 @@ values
 ('Graphic Tee', 'Bold print, casual vibe', 18.00, 10.00, 1000, 1000);
 
 --------------------------------------------------
--- 5. INSERT INTO ORDER_ITEM TABLE
+-- 8. INSERT INTO ORDER_ITEM TABLE
 -- Insert sample data into the Order_Item table
 -- Written by Kaylee Grafton
 --------------------------------------------------
@@ -340,7 +340,7 @@ values
 (1009, 1009, 3);
 
 --------------------------------------------------
--- 7. INSERT INTO INVENTORY TABLE
+-- 9. INSERT INTO INVENTORY TABLE
 -- Insert sample data into the Inventory table
 -- Written by Kaylee Grafton
 --------------------------------------------------
